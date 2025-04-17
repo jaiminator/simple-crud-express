@@ -50,14 +50,19 @@ const getAnimals = () => {
         .then((animals) => {
             console.log(animals);
             const animalsContainer = document.getElementById("animalsContainer");
-            animalsContainer.innerHTML = "";
+            let htmlTable = "<table style='width:100%'><tr><th>NAME</th><th>STRENGTH</th></tr>";
             animals.forEach((animal) => {
-                animalsContainer.innerHTML += `
+                htmlTable += `
+                
+                <tr><td>${animal.name}</td><td>${animal.strength}</td></tr>
+                
                 <div id='animal${animal.id}'>${animal.name} - <b>Strength:</b> ${animal.strength}
                 <button class='btn-delete' onclick='deleteAnimal(${animal.id})'>DELETE</button>
                 <button class='btn-update' onclick='updateAnimal(${JSON.stringify(animal)})'>UPDATE</button>
                 </div><br>`;
             });
+            htmlTable += "</table>";
+            animalsContainer.innerHTML = htmlTable
         });
 };
 
