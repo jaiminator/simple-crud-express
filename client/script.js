@@ -23,10 +23,14 @@ const createAnimal = () => {
             })
         })
             .then(() => {
+                responseDIV.style.display = "inline-block";
                 responseDIV.innerHTML = "CREATED ANIMAL";
                 document.getElementById("inputName").value = "";
                 document.getElementById("inputStrength").value = "";
                 getAnimals();
+                setTimeout(() => {
+                    responseDIV.style.display = "none";
+                }, 3000)
             })
             .catch(() => (responseDIV.innerHTML = "ERROR TO CONNECT SERVER"));
     } else {
@@ -72,29 +76,29 @@ const deleteAnimal = (idAnimal) => {
 };
 
 const updateAnimal = (animal) => {
-
-    const nameToUpdate = prompt("Ingrese un nuevo nombre");
-    const strengthToUpdate = Number(prompt("Ingrese una nueva fuerza"));
+    const nameToUpdate = prompt("Ingrese un nuevo nombre", animal.name);
+    const strengthToUpdate = Number(prompt("Ingrese una nueva fuerza", animal.strength));
     const idToUpdate = animal.id;
 
-    if (nameToUpdate || strengthToUpdate) {
-        fetch(BASE_URL + "/animals/" + idToUpdate, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                name: nameToUpdate,
-                strength: strengthToUpdate
-            }),
-        })
-        .then(() => {
-            alert(`Animal ${animal.name} updated to ${nameToUpdate}`);
-            getAnimals();
-        }) 
-    } else {
-        alert("FIEDLS REQUIRED TO UPDATE");
+    if (!nameToUpdate || !strengthToUpdate) {
+        alert("Por favor ingrese NOMBRE y FUERZA a actualizar");
+        return;
     }
+
+    fetch(BASE_URL + "/animals/" + idToUpdate, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            name: nameToUpdate,
+            strength: strengthToUpdate
+        }),
+    })
+    .then(() => {
+        alert(`Animal ${animal.name} updated to ${nameToUpdate}`);
+        getAnimals();
+    }) 
 }
 
 btnCreate.addEventListener("click", createAnimal);

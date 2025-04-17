@@ -55,11 +55,13 @@ app.put('/animals/:id', (req, res) => {
     const idToUpdate = Number(req.params.id);
     if (!req.body) {
         res.status(400).send('Body not provided');
+        return;
     }
     const nameToUpdate = req.body.name;
     const strengthToUpdate = req.body.strength;
     if (!nameToUpdate || !strengthToUpdate) {
         res.status(400).send('Please provide name and strength to update');
+        return;
     }
     //Obtener elemento id del array para actualizarlo
     const indexAnimal = animals.findIndex((animal) => animal.id == idToUpdate);
