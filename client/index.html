@@ -1,0 +1,58 @@
+<!-- PARTE CLIENTE -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect client-server</title>
+    <style>
+        #mainContainer {
+            margin: 0;
+        }
+        .animalBox {
+            border: 2px solid purple;
+            border-radius: 10px;
+            padding: 5px;
+            margin: auto;
+            width: max-content;
+            background-color: beige;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #btn-create {
+            background-color: chartreuse;
+            color: #000;
+        }
+        .btn-delete {
+            background-color: crimson;
+            color: white;
+        }
+        .btn-update {
+            background-color: dodgerblue;
+            color: white;
+        }
+        span{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="mainContainer">
+        <div class="animalBox">
+            <h1>ANIMAL WORLD</h1>
+            <h3>NEW ANIMAL</h3>
+            <p><b>Name:</b> <input type="text" id="inputName"> <span>*</span><br></p>
+            <p><b>Strength:</b> <input type="number" id="inputStrength"> <span>*</span><br></p>
+            <p><span>*</span>required fields</p>
+            <button id="btn-create" type="submit">CREATE</button>
+        
+            <div id="responseDIV"></div>
+            <h3>LIST OF ANIMALS</h3>
+            <div id="animalsContainer">
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
