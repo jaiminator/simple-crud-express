@@ -51,9 +51,26 @@ app.delete('/animals/:id', (req, res) => {
     }
 });
 
-/* app.put('/animals', (req, res) => {
-    
-}); */
+app.put('/animals/:id', (req, res) => {
+    const idToUpdate = Number(req.params.id);
+    if (!req.body) {
+        res.status(400).send('Body not provided');
+    }
+    const nameToUpdate = req.body.name;
+    const strengthToUpdate = req.body.strength;
+    if (!nameToUpdate || !strengthToUpdate) {
+        res.status(400).send('Please provide name and strength to update');
+    }
+    //Obtener elemento id del array para actualizarlo
+    const indexAnimal = animals.findIndex((animal) => animal.id == idToUpdate);
+    if(indexAnimal >= 0){
+        animals[indexAnimal].name = nameToUpdate;
+        animals[indexAnimal].strength = strengthToUpdate;
+        res.sendStatus(200);
+    } else {
+        res.sendStatus(404);
+    }
+});
 
 app.listen(port, () => {
     console.log(`App listening on ${port}`);
