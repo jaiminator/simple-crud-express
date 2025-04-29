@@ -35,19 +35,19 @@ app.post('/animals', (req, res) => {
         name: req.body.name,
         strength: req.body.strength
     })
-    console.log('Created');
+    console.log('Created...');
     currentId++;
     res.sendStatus(201);
 });
 
 app.delete('/animals/:id', (req, res) => {
     const idToDelete = Number(req.params.id);
-    const filteredAnimals = animals = animals.filter((animal) => animal.id !== idToDelete);
+    const filteredAnimals = animals.filter((animal) => animal.id !== idToDelete);
     if (filteredAnimals.length == animals.length) {
-        res.status(404).send('No animal deleted');
+        res.status(404).send('No animal deleted...');
     } else {
         animals = filteredAnimals;
-        res.sendStatus(200);
+        res.status(200).send('Animal deleted...');
     }
 });
 
